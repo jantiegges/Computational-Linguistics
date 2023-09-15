@@ -36,9 +36,9 @@
 \newcommand{\PSnum}{2}
 
 \author{
-  \textbf{Name}:       %Put your name here.
-, \textbf{McGill ID}:  %Put your McGill ID here.
-\\ \textit{Collaborators}:  %Put the names of up to 2 people if you completed the assignment as a group.
+  \textbf{Jan Tiegges}:       %Put your name here.
+, \textbf{261180937}:  %Put your McGill ID here.
+\\ \textit{Cerys Jenkins}:  %Put the names of up to 2 people if you completed the assignment as a group.
 }
 
 \begin{document}
@@ -143,6 +143,7 @@ why in the box below}.
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %% (you may delete this comment)
   %%%%%%%%%%%%%%%%%%%%%%%
+  The first function \textit{take-square} is missing the argument \textit{x}. The second function \textit{sum-of-squares} is missing the argument \textit{x} and \textit{y}, as it calling the function \textit{take-square} with the arguments \textit{x} and \textit{y} in the input brackets, resulting in an error. 
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -357,6 +358,7 @@ languages $A$ and $B$ such that $(A\cdot B)=(B\cdot A)$.
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
+  Let $A = \{a\}$ and $B = \{aa\}$. Then $(A\cdot B) = \{aaa\}$ and $(B\cdot A) = \{aaa\}$. Therefore, $(A\cdot B) = (B\cdot A)$.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -373,6 +375,7 @@ $(A\cdot B)$ does not equal $(B\cdot A)$
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
+  Let $A = \{a\}$ and $B = \{b\}$. Then $(A\cdot B) = \{ab\}$ and $(B\cdot A) = \{ba\}$. Therefore, $(A\cdot B) \neq (B\cdot A)$.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -388,6 +391,7 @@ Find an example of a language $L$ such that $L=L^2$, i.e. $L=(L\cdot L)$.
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
+  Lets take the 2-alternating language $L = \{a, b\}^*$. Then $L^2 = \{a, b\}^* \cdot \{a, b\}^* = \{a, b\}^*$. Therefore, $L = L^2$.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -404,6 +408,7 @@ contained in $L$.
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
+  Let $L$ and $L'$ be two languages. Then $L \cap L' \subseteq L$. This is because $L \cap L'$ is the set of all strings that are in both $L$ and $L'$, therefore all strings in $L \cap L'$ are also in $L$. So $L$ is a superset of $L \cap L'$, $L \cap L' \subseteq L$.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -421,6 +426,7 @@ in the Cartesian product of unions $(L_1 \cup L_2) \times (L_3 \cup L_4)$.
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
+  $(L_1 \cap L_2) \times (L_3 \cap L_4)$ results in tuples where the first string is from either $L_1$ or $L_2$ and the second string from either $L_3$ or $L_4$, or more formally $(L_1 \cap L_2) \times (L_3 \cap L_4) = \{(x, y) | x \in L_1 \cup L_2 \land y \in L_3 \cup L_4\}$. $(L_1 \times L_3) \cup (L_2 \times L_4)$ results in tuples where the first string is from $L_1$ and the second string is from $L_3$, or the first string is from $L_2$ and the second string is from $L_4$, or more formally $(L_1 \times L_3) \cup (L_2 \times L_4) = \{(x, y) | (x \in L_1 \land y \in L_3) \lor (x \in L_2 \land y \in L_4)\}$. Therefore, $(L_1 \times L_3) \cup (L_2 \times L_4) \subseteq (L_1 \cup L_2) \times (L_3 \cup L_4)$.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -438,6 +444,7 @@ Cartesian product $L \times L'$ is always equal to the number of elements in $L'
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
+  $|L \times L'| = |L| \cdot |L'|$ and $|L' \times L| = |L'| \cdot |L|$. Therefore, $|L \times L'| = |L' \times L|$.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -456,6 +463,8 @@ $\{\epsilon\}$, or an infinite language.
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
+  If $L$ is the empty set, then $(L\cdot L) = \emptyset \cdot \emptyset = \emptyset$. If $L$ is the set $\{\epsilon\}$, then $(L\cdot L) = \{\epsilon\} \cdot \{\epsilon\} = \{\epsilon\}$. If $L$ is an infinite language, then $(L\cdot L) = L^* \cdot L^* = L^*$, as all strings are just concatenations of strings from $L$. Lets asumme now $L$ is a finite language with the string $x$. Then $L \cdot L$ will contain the string $xx$, which is not in $L$. Therefore, $L$ is either the empty set, the set $\{\epsilon\}$, or an infinite language.
+  Therefore, $L$ is either the empty set, the set $\{\epsilon\}$, or an infinite language.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
