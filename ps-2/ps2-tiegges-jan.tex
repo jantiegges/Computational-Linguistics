@@ -143,7 +143,7 @@ why in the box below}.
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %% (you may delete this comment)
   %%%%%%%%%%%%%%%%%%%%%%%
-  The first function \textit{take-square} is missing the argument \textit{x}. The second function \textit{sum-of-squares} is missing the argument \textit{x} and \textit{y}, as it calling the function \textit{take-square} with the arguments \textit{x} and \textit{y} in the input brackets, resulting in an error. 
+  The first function \textit{take-square} is missing the argument \textit{x}, which is required for functions. The second function \textit{sum-of-squares} is missing the argument \textit{x} and \textit{y}, as it is calling the function \textit{take-square} with the arguments \textit{x} and \textit{y} in the input brackets, resulting in an error. These kind of operations can only be made inside the function itself, but not in the input brackets.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -408,7 +408,7 @@ contained in $L$.
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
-  Let $L$ and $L'$ be two languages. Then $L \cap L' \subseteq L$. This is because $L \cap L'$ is the set of all strings that are in both $L$ and $L'$, therefore all strings in $L \cap L'$ are also in $L$. So $L$ is a superset of $L \cap L'$, $L \cap L' \subseteq L$.
+  This is because $L \cap L'$ is the set of all strings that are in both $L$ and $L'$, i.e. $L \cap L' = \{x | x \in L \land x \in L'\}$. Therefore, all strings in $L \cap L'$ are also in $L$, i.e. $L \cap L' \subseteq L$.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -426,7 +426,7 @@ in the Cartesian product of unions $(L_1 \cup L_2) \times (L_3 \cup L_4)$.
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
-  $(L_1 \cap L_2) \times (L_3 \cap L_4)$ results in tuples where the first string is from either $L_1$ or $L_2$ and the second string from either $L_3$ or $L_4$, or more formally $(L_1 \cap L_2) \times (L_3 \cap L_4) = \{(x, y) | x \in L_1 \cup L_2 \land y \in L_3 \cup L_4\}$. $(L_1 \times L_3) \cup (L_2 \times L_4)$ results in tuples where the first string is from $L_1$ and the second string is from $L_3$, or the first string is from $L_2$ and the second string is from $L_4$, or more formally $(L_1 \times L_3) \cup (L_2 \times L_4) = \{(x, y) | (x \in L_1 \land y \in L_3) \lor (x \in L_2 \land y \in L_4)\}$. Therefore, $(L_1 \times L_3) \cup (L_2 \times L_4) \subseteq (L_1 \cup L_2) \times (L_3 \cup L_4)$.
+  $(L_1 \times L_3) \cup (L_2 \times L_4)$ results in tuples where the first string is from $L_1$ and the second string is from $L_3$, or the first string is from $L_2$ and the second string is from $L_4$, or more formally $(L_1 \times L_3) \cup (L_2 \times L_4) = \{(x, y) | (x \in L_1 \land y \in L_3) \lor (x \in L_2 \land y \in L_4)\}$. $(L_1 \cap L_2) \times (L_3 \cap L_4)$ results in tuples where the first string is from either $L_1$ or $L_2$ and the second string from either $L_3$ or $L_4$, or more formally $(L_1 \cap L_2) \times (L_3 \cap L_4) = \{(x, y) | x \in L_1 \cup L_2 \land y \in L_3 \cup L_4\}$.  Since $x$ can be in either $L_1$ or $L_2$ and $y$ in either $L_3$ or $L_4$, it includes all possibilities for $x$ and $y$  and therefore, $(L_1 \times L_3) \cup (L_2 \times L_4) \subseteq (L_1 \cup L_2) \times (L_3 \cup L_4)$.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -444,7 +444,7 @@ Cartesian product $L \times L'$ is always equal to the number of elements in $L'
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
-  $|L \times L'| = |L| \cdot |L'|$ and $|L' \times L| = |L'| \cdot |L|$. Therefore, $|L \times L'| = |L' \times L|$.
+  $|L \times L'| = |L| \cdot |L'|$ and $|L' \times L| = |L'| \cdot |L| = |L| \cdot |L'|$. Therefore, $|L \times L'| = |L' \times L|$.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -463,9 +463,7 @@ $\{\epsilon\}$, or an infinite language.
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
-  If $L$ is the empty set, then $(L\cdot L) = \emptyset \cdot \emptyset = \emptyset$. If $L$ is the set $\{\epsilon\}$, then $(L\cdot L) = \{\epsilon\} \cdot \{\epsilon\} = \{\epsilon\}$. If $L$ is an infinite language, then $(L\cdot L) = L^* \cdot L^* = L^*$, as all strings are just concatenations of strings from $L$. Lets asumme now $L$ is a finite language with the string $x$. Then $L \cdot L$ will contain the string $xx$, which is not in $L$. Therefore, $L$ is either the empty set, the set $\{\epsilon\}$, or an infinite language.
-  Therefore, $L$ is either the empty set, the set $\{\epsilon\}$, or an infinite language.
-
+  If $L$ is the empty set, then $(L\cdot L) = \emptyset \cdot \emptyset = \emptyset$. If $L$ is the set $\{\epsilon\}$, then $(L\cdot L) = (\{\epsilon\} \cdot \{\epsilon\}) = \{\epsilon\}$. If $L$ is an infinite language, then $(L\cdot L) = L^* \cdot L^* = L^*$, as all strings are just concatenations of strings from $L$. Lets assume now $L$ is a finite language with the string $x$. Then $L \cdot L$ will contain the string $xx$, which is not in $L$. This is because in a finite language, concatenating the language with itself a finite number of times would still result in a finite language, not equal to itself. Therefore, $L$ is either the empty set, the set $\{\epsilon\}$, or an infinite language.
 \end{AnswerBox}%% Do not delete %%%%%%%
 
 
@@ -486,6 +484,14 @@ Andreas et al. (2022) lay out a framework for how to think about data collection
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
+
+  Supervised learning is a type of machine learning in which models are trained using labeled data. This means that input data is associated with the corresponding known classification outputs in advance. The model then uses this labeled data to make predictions, with the overall goal being to minimize the error between the predictions and the actual output. In contrast, self-supervised learning is a different approach to machine learning that works with unlabeled data where the model does not know the correct outputs. In natural language processing, self-supervised models are often trained to predict certain aspects of the input data, such as the next word in a sentence or a missing word in a sentence. The goal is to develop a representation, usually a high-dimensional feature vector, that captures the underlying structure of the data.
+
+  One of the advantages of self-supervised learning is its ability to learn data representations without requiring labeled data, which can be a costly and time-consuming effort. This is especially important in cases where the true meaning of the data is difficult to assess, such as in the study of sperm whale communication, where humans cannot directly interpret the data. Moreover, self-supervised learning can develop more generalizable data representations that can be applied to a wide range of downstream tasks.
+
+  Nevertheless, self-supervised learning also has its drawbacks. A major challenge lies in evaluating the quality of the learned representations, as there is no clearly defined objective measure for assessing the model performance. In addition, self-supervised learning can require significant computational effort as the need to be trained on large amounts of unlabeled data to produce valuable representations.
+
+  In summary, the authors emphasize the potential of self-supervised learning as it learns more robust representations than supervised learning and can help to better understand the mysteries of the oceans. However, there are also drawbacks mentioned above, to which can be added that besides the cost and environmental impact of training these self-supervised models, a large data set must be available in the first place. The authors emphasize the importance of open source datasets and cross-cutting initiatives in science to really exploit the potential of this technique.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
