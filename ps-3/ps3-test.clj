@@ -32,15 +32,22 @@
 (defn get-vocabulary [word-tokens vocab]
  (if (empty? word-tokens)
      vocab
-     (if (member-of-list? ;;finish this line
-         (get-vocabulary ;;finish this line
-         (get-vocabulary ;;finish this line
-
+     (if (member-of-list? (first word-tokens) vocab)
+       (get-vocabulary (rest word-tokens) vocab) 
+       (get-vocabulary (rest word-tokens) (cons (first word-tokens) vocab)))))  
+(get-vocabulary moby-word-tokens '())
+(def moby-vocab (get-vocabulary moby-word-tokens '()))
 
 ;; Problem 02: define a function `get-count-of-word`
 
-;;(defn get-count-of-word [w word-tokens count]
-;;  fill this in ...
+(defn get-count-of-word [w word-tokens count]
+  (if (empty? word-tokens)
+    count
+    (if (= w (first word-tokens))
+      (get-count-of-word w (rest word-tokens) (+ count 1))
+      (get-count-of-word w (rest word-tokens) count)
+      )))
+(get-count-of-word 'the (list 'the 'the 'whale) 0)
 
 
 ;; Problem 03: define a variable `moby-word-frequencies`
