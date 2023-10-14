@@ -7,6 +7,7 @@
 \usepackage{url}
 % use straight quotes in texttt environment, make 0 different from O
 \usepackage[zerostyle=b,straightquotes,scaled=.93]{newtxtt}
+\usepackage{siunitx}
 
 \usepackage{listings}
 \lstset{
@@ -36,8 +37,8 @@
 \newcommand{\PSnum}{3}
 
 \author{
-  \textbf{Name}:       %Put your name here.
-, \textbf{McGill ID}:  %Put your McGill ID here.
+  \textbf{Name}: Jan Tiegges       %Put your name here.
+, \textbf{McGill ID}: 261180937 %Put your McGill ID here.
 \\ \textit{Collaborators}:  %Put the names of up to 2 people if you completed the assignment as a group.
 }
 
@@ -348,6 +349,7 @@ sampled assigned different probabilities under this model? Explain why this is
     %%%%%%%%%%%%%%%%%%%%%%%
     %% YOUR ANSWER HERE. %%
     %%%%%%%%%%%%%%%%%%%%%%%
+    The sentence probability is always identical $\frac{1}{2744000}$. This is due to the fact, that the probability among the different words in the vocabulary is uniformly distributed, meaning that no matter which words are being sampled, the probability will be unaffected. Would we sample words from outside the vocabulary, we could achieve a probability of 0 as alternative, but as we sample from the vocabulary only, we will always achieve the same probability.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -409,7 +411,9 @@ process.
     %%%%%%%%%%%%%%%%%%%%%%%
     %% YOUR ANSWER HERE. %%
     %%%%%%%%%%%%%%%%%%%%%%%
-
+    the stepping I
+    methodically precisely the
+    hand it almost
 \end{AnswerBox}%% Do not delete %%%%%%%
 
 \hrulefill %--------------------------------
@@ -479,6 +483,14 @@ sentence suffices to compute this probability?
     %%%%%%%%%%%%%%%%%%%%%%%
     %% YOUR ANSWER HERE. %%
     %%%%%%%%%%%%%%%%%%%%%%%
+    Sentence Probabilities: 
+    \begin{enumerate}
+      \item the stepping I: \num{9.858e-6}
+      \item methodically precisely the: \num{1.095e-6}
+      \item hand it almost: \num{4.381e-7}
+      \item stepping it almost: \num{4.381e-7}
+    \end{enumerate}
+    We no longer use the uniform distribution but a probability distribution based on the frequency of the words in the corpus, meaning that the probabilities of the individual words can differ because they occur with different frequency. Therefore, we do not always get the same probability for our sentence as in the uniform case. However, some words still have the same frequency in the corpus and therefore the same probability, which is why we can generate different sentences with the same probability. This can be observed with the sentences \textit{hand it almost} and /textit{stepping it almost}, which both have the same probability, because the words \textit{hand} and \textit{stepping} occur equally often in the corpus (1 time). In general, the number of occurrences of each word in a sentence in the corpus is sufficient for calculating the probability in a bag of words model, since we can simply calculate 1 divided by the multiplication of these numbers.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -499,6 +511,9 @@ Elman's (1991) seminal work is an early example of how neural networks, here rec
   %%%%%%%%%%%%%%%%%%%%%%%
   %% YOUR ANSWER HERE. %%
   %%%%%%%%%%%%%%%%%%%%%%%
+  Traditional computational language models are often based on explicit rules or algorithms used to generate or analyze sentences. In contrast, neural network models use connectionist learning, where the network learns to make predictions or produce outputs based on patterns in the input data. This learning is often implicit and distributed across the network, rather than being explicitly programmed. The authors claim that the latter is however not necessarily a no-rule system, since it is unclear what exactly is meant by a rule. They therefore argue that the difference lies mainly in the nature of the rules used and what kind of information counts as explicitly present. Furthermore, traditional language models rely on discrete and abstract symbols representing linguistic units such as words and phrases. Neural network models, on the other hand, create representations corresponding to the activation behaviours of the individual nodes. Such representations are not bound to specific linguistic units, but result from the learning process of the network. 
+  
+  Probing techniques involve testing the behavior of the network on specific tasks to draw conclusions about the nature of the learned linguistic representation or tasks. However, it can be difficult to design these tests to accurately capture the relevant linguistic phenomena, and it can be difficult to interpret the results of these tests. Moreover, it is not always clear how the network's behavior on these tests generalizes to its behavior on other tasks or in other contexts.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 

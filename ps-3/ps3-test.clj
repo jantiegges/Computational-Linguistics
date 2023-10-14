@@ -47,19 +47,19 @@
       (get-count-of-word w (rest word-tokens) (+ count 1))
       (get-count-of-word w (rest word-tokens) count)
       )))
-(get-count-of-word 'the (list 'the 'the 'whale) 0)
+(get-count-of-word 'the '() 0)
 
 
 ;; Problem 03: define a variable `moby-word-frequencies`
-
 (defn get-word-counts [vocab word-tokens]
   (let [count-word (fn [w] 
                      (get-count-of-word w word-tokens 0))]
     (map count-word vocab)))
+(def moby-word-frequencies (get-word-counts moby-vocab moby-word-tokens))
+(count (get-word-counts moby-vocab moby-word-tokens))
 
 
 ;; Problem 04: write a function `sample-uniform-BOW-sentence`
-
 (defn flip [p]
   (if (< (rand 1) p)
     true
@@ -79,21 +79,65 @@
     (map (fn [x] (/ 1 num-outcomes))
 	 outcomes)))
 
+(defn sample-uniform-BOW-sentence [vocab n]
+  (if (= n 0)
+    '()
+    (cons (sample-categorical vocab (create-uniform-distribution vocab))
+    (sample-uniform-BOW-sentence vocab (- n 1)))
+  ))
+(sample-uniform-BOW-sentence moby-vocab 1)
+
 
 ;; Problem 5: Define a function `compute-uniform-BOW-prob`
+(defn compute-uniform-BOW-prob [sentence vocab]
+  (if (empty? sentence)
+    1.0
+  (if (member-of-list? (first sentence) vocab)
+    (* (/ 1 (count vocab)) (compute-uniform-BOW-prob (rest sentence) vocab))
+    0.0
+    )
+  ))
+(compute-uniform-BOW-prob '(every as the every) '(the a every))
+
+;; Problem 6:
+(compute-uniform-BOW-prob (sample-uniform-BOW-sentence moby-vocab 3) moby-vocab)
 
 
 ;; Problem 7: Define a variable `moby-word-probabilities`
-
 (defn sample-BOW-sentence [len vocabulary probabilities]
   (if (= len 0)
     '()
     (cons (sample-categorical vocabulary probabilities)
 	  (sample-BOW-sentence (- len 1) vocabulary probabilities))))
 
+(count(normalize moby-word-frequencies))
+(def moby-word-probabilities (normalize moby-word-frequencies))
+
+;; Problem 8: sample
+(sample-BOW-sentence 3 moby-vocab moby-word-probabilities)
 
 ;; Problem 9: Define a function lookup-probability
-
+(defn lookup-probability [w outcomes probs]
+  (if (empty? outcomes)
+    0.0
+    (if (= w (first outcomes))
+      (first probs)
+      (lookup-probability w (rest outcomes) (rest probs)))))
+(lookup-probability 'every '(the a every) '(0.2 0.5 0.3))
 
 ;; Problem 10: Define a function compute-BOW-prob
+(defn compute-BOW-prob [sentence vocabulary probabilities]
+  (if (empty? sentence)
+    1.0
+    (if (member-of-list? (first sentence) vocabulary)
+      (* (lookup-probability (first sentence) vocabulary probabilities) (compute-BOW-prob (rest sentence) vocabulary probabilities))
+      0.0)))
+(compute-BOW-prob '(every a) '(the a every) '(0.2 0.5 0.3))
 
+;; Problem 11
+(compute-BOW-prob '(the stepping I) moby-vocab moby-word-probabilities)
+(compute-BOW-prob '(methodically precisely the) moby-vocab moby-word-probabilities)
+(compute-BOW-prob '(stepping it almost) moby-vocab moby-word-probabilities)
+
+;; how oftern does the word "the" appear in moby-word-tokens?
+(get-count-of-word 'hand moby-word-tokens 0)

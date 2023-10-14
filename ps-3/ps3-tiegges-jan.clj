@@ -30,29 +30,32 @@
       (member-of-list? w (rest l)))))
 
 (defn get-vocabulary [word-tokens vocab]
- (if (empty? word-tokens)
-     vocab
-     (if (member-of-list? ;;finish this line
-         (get-vocabulary ;;finish this line
-         (get-vocabulary ;;finish this line
+  (if (empty? word-tokens)
+    vocab
+    (if (member-of-list? (first word-tokens) vocab)
+      (get-vocabulary (rest word-tokens) vocab)
+      (get-vocabulary (rest word-tokens) (cons (first word-tokens) vocab)))))
+(def moby-vocab (get-vocabulary moby-word-tokens '()))
 
 
 ;; Problem 02: define a function `get-count-of-word`
-
-;;(defn get-count-of-word [w word-tokens count]
-;;  fill this in ...
+(defn get-count-of-word [w word-tokens count]
+  (if (empty? word-tokens)
+    count
+    (if (= w (first word-tokens))
+      (get-count-of-word w (rest word-tokens) (+ count 1))
+      (get-count-of-word w (rest word-tokens) count))))
 
 
 ;; Problem 03: define a variable `moby-word-frequencies`
-
 (defn get-word-counts [vocab word-tokens]
   (let [count-word (fn [w] 
                      (get-count-of-word w word-tokens 0))]
     (map count-word vocab)))
+(def moby-word-frequencies (get-word-counts moby-vocab moby-word-tokens))
 
 
 ;; Problem 04: write a function `sample-uniform-BOW-sentence`
-
 (defn flip [p]
   (if (< (rand 1) p)
     true
@@ -72,21 +75,40 @@
     (map (fn [x] (/ 1 num-outcomes))
 	 outcomes)))
 
+(defn sample-uniform-BOW-sentence [n vocab]
+  (if (= n 0)
+    '()
+    (cons (sample-categorical vocab (create-uniform-distribution vocab))
+          (sample-uniform-BOW-sentence vocab (- n 1)))))
 
 ;; Problem 5: Define a function `compute-uniform-BOW-prob`
-
+(defn compute-uniform-BOW-prob [sentence vocab]
+  (if (empty? sentence)
+    1.0
+    (if (member-of-list? (first sentence) vocab)
+      (* (/ 1 (count vocab)) (compute-uniform-BOW-prob (rest sentence) vocab))
+      0.0)))
 
 ;; Problem 7: Define a variable `moby-word-probabilities`
-
 (defn sample-BOW-sentence [len vocabulary probabilities]
   (if (= len 0)
     '()
     (cons (sample-categorical vocabulary probabilities)
 	  (sample-BOW-sentence (- len 1) vocabulary probabilities))))
-
+(def moby-word-probabilities (normalize moby-word-frequencies))
 
 ;; Problem 9: Define a function lookup-probability
-
+(defn lookup-probability [w outcomes probs]
+  (if (empty? outcomes)
+    0.0
+    (if (= w (first outcomes))
+      (first probs)
+      (lookup-probability w (rest outcomes) (rest probs)))))
 
 ;; Problem 10: Define a function compute-BOW-prob
-
+(defn compute-BOW-prob [sentence vocabulary probabilities]
+  (if (empty? sentence)
+    1.0
+    (if (member-of-list? (first sentence) vocabulary)
+      (* (lookup-probability (first sentence) vocabulary probabilities) (compute-BOW-prob (rest sentence) vocabulary probabilities))
+      0.0)))
