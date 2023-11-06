@@ -51,15 +51,35 @@
         (call ishmael)))
 
 ;;Problem 1: define `theta-corpus-joint`
+(defn theta-corpus-joint [theta corpus theta-probs]
+  (let [theta-log-prob (log2 (score-categorical theta thetas theta-probs))
+        corpus-log-prob (score-corpus corpus theta)]
+    (+ theta-log-prob corpus-log-prob)))
+(theta-corpus-joint theta1 my-corpus theta-prior)
 
 
 ;;Problem 2: define `compute-marginal`
+(defn compute-marginal [corpus theta-probs]
+  (let [theta-corpus-joints (map (fn [theta] (theta-corpus-joint theta corpus theta-probs)) thetas)]
+    (logsumexp theta-corpus-joints))
+  )
+(compute-marginal my-corpus theta-prior)
 
 
 ;;Problem 3: define `compute-conditional-prob`
+(defn compute-conditional-prob [theta corpus theta-probs]
+  (let [log-numerator (theta-corpus-joint theta corpus theta-probs)
+        log-denominator (compute-marginal corpus theta-probs)]
+    (- log-numerator log-denominator)))
+(compute-conditional-prob theta1 my-corpus theta-prior)
 
 
 ;;Problem 4: define `compute-conditional-dist`
+(defn compute-conditional-dist [corpus theta-probs]
+  (map (fn [theta] (compute-conditional-prob theta corpus theta-probs)) thetas))
+(compute-conditional-dist my-corpus theta-prior)
+;; compute values bag to normal probabilities
+(map (fn [x] (Math/pow 2 x)) (compute-conditional-dist my-corpus theta-prior))
 
 
 ;;Problem 6: define `compute-posterior-predictive`
