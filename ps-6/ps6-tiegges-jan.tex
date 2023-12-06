@@ -36,8 +36,8 @@
 \newcommand{\PSnum}{6}
 
 \author{
-  \textbf{Name}:       %Put your name here.
-, \textbf{McGill ID}:  %Put your McGill ID here.
+  \textbf{Name}: Jan Tiegges       %Put your name here.
+, \textbf{McGill ID}: 261180937 %Put your McGill ID here.
 \\ \textit{Collaborators}:  %Put the names of up to 2 people if you completed the assignment as a group.
 }
 
@@ -347,6 +347,11 @@ different probabilities, and explain why this is true.
     %%%%%%%%%%%%%%%%%%%%%%%
     %% YOUR ANSWER HERE. %%
     %%%%%%%%%%%%%%%%%%%%%%%
+    Sequence 1: '(Call me)  probability: -4.2270
+
+    Sequence 2: '(me Call)  probability: -1.9002
+
+    The difference in these probabilities results from the fact that the HMM takes into account the order in which states and observations occur. The transition probabilities from the start to the first state that generates "call" or "me" and the subsequent transition to the state that generates the second word are different (see definition of transition and observation probabilities). Therefore, the probability that the sequences "Call me" and "me Call" are generated is different.
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -435,6 +440,12 @@ states and the length $k$ of the sequence of words.
     %%%%%%%%%%%%%%%%%%%%%%%
     %% YOUR ANSWER HERE. %%
     %%%%%%%%%%%%%%%%%%%%%%%
+    The total number of calls results from the tree of recursive calls, in which each node branches to $n$ new calls, where $n$ represents the number of hidden states. The depth of this tree is $k$ (the number of words). The total number of calls is therefore
+    \begin{equation*}
+        \sum_{i=0}^{k} n^i
+    \end{equation*}
+    The runtime of the program is therefore exponential in the number of words, i.e:
+    $O(n^k)$
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
@@ -476,6 +487,11 @@ the procedure?
     %%%%%%%%%%%%%%%%%%%%%%%
     %% YOUR ANSWER HERE. %%
     %%%%%%%%%%%%%%%%%%%%%%%
+    In contrast to the non-memorized version, the total number of calls in the memoized version is significantly lower and is polynomial in k. This is because the compute-next-words-marginal-mem function is only called once for each unique combination of current state and remaining word sequence. In the non-memorized version, on the other hand, the result is recalculated for each recursive call, even if the same subsequence and the same state have already been calculated before.
+    \begin{equation}
+      Total Number of Calls = n \times \frac{k(k + 1)}{2}
+    \end{equation}
+    Runtime Complexity $ = O(nk^2)$
 
 \end{AnswerBox}%% Do not delete %%%%%%%
 
